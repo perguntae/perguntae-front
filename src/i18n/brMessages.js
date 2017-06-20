@@ -1,3 +1,7 @@
 export default {
-  br: {},
+  br: {
+    menu: {
+      createClass: 'Criar nova sala',
+    },
+  },
 };
