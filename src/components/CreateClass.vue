@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(() => {
         console.log('submit!', this.createClassForm);
       });
     },
