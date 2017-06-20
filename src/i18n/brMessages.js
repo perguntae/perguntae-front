@@ -3,5 +3,14 @@ export default {
     menu: {
       createClass: 'Criar nova sala',
     },
+    pages: {
+      createClass: {
+        form: {
+          name: 'Nome',
+          pass: 'Senha',
+          create: 'Criar',
+        },
+      },
+    },
   },
 };
