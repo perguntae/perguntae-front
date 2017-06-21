@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <div class="header">
+      <el-menu :router="true" theme="dark" :default-active="activeIndex" class="header__menu" mode="horizontal">
+        <el-menu-item index="CreateClass">{{ $t("menu.createClass") }}</el-menu-item>
+      </el-menu>
+    </div>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      activeIndex: 'CreateClass',
+    };
+  },
 };
 </script>
 
@@ -21,5 +33,9 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
+}
+
+.content {
+  padding: 20px;
 }
 </style>
