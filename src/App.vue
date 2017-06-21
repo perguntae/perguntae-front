@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading.fullscreen.lock="fullscreenLoading">
     <router-view></router-view>
   </div>
 </template>
@@ -7,6 +7,20 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      fullscreenLoading: false,
+    };
+  },
+  created() {
+    this.eventHub.$on('showFullscreenLoading', () => {
+      this.fullscreenLoading = true;
+    });
+
+    this.eventHub.$on('hideFullscreenLoading', () => {
+      this.fullscreenLoading = false;
+    });
+  },
 };
 </script>
 
