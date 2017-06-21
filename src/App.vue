@@ -16,8 +16,17 @@ export default {
   name: 'app',
   data() {
     return {
-      activeIndex: 'CreateClass',
+      fullscreenLoading: false,
     };
+  },
+  created() {
+    this.eventHub.$on('showFullscreenLoading', () => {
+      this.fullscreenLoading = true;
+    });
+
+    this.eventHub.$on('hideFullscreenLoading', () => {
+      this.fullscreenLoading = false;
+    });
   },
 };
 </script>
