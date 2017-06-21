@@ -11,6 +11,16 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
+const eventHub = new Vue();
+
+Vue.mixin({
+  data() {
+    return {
+      eventHub,
+    };
+  },
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
