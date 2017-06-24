@@ -21,8 +21,7 @@ Vue.mixin({
   },
 });
 
-/* eslint-disable no-new */
-new Vue({
+window.$app = new Vue({
   el: '#app',
   router,
   i18n,
