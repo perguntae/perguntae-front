@@ -17,6 +17,10 @@
 </template>
 
 <script>
+import Http from '../Http';
+
+const http = new Http();
+
 export default {
   name: 'create-class',
   data() {
@@ -30,7 +34,16 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(() => {
-        console.log('submit!', this.createClassForm);
+        http.post('class', this.createClassForm)
+          .then((res) => {
+            this.$router.push({
+              name: 'Room',
+              params: {
+                hash: res.data.hash,
+              },
+            });
+          })
+          .catch();
       });
     },
   },
