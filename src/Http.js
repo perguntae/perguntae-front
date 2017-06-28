@@ -1,10 +1,18 @@
 class Http {
-  post() {
+  post(url) {
     window.$app.eventHub.$emit('showFullscreenLoading');
 
-    setTimeout(() => {
+    return new Promise((resolve) => {
       window.$app.eventHub.$emit('hideFullscreenLoading');
-    }, 2000);
+
+      if (url === 'class') {
+        resolve({
+          data: {
+            hash: 'cGVyZ3VudGFl6WZlcmEh',
+          },
+        });
+      }
+    });
   }
 }
 
