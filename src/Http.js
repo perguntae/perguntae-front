@@ -5,7 +5,7 @@ class Http {
     return new Promise((resolve) => {
       window.$app.eventHub.$emit('hideFullscreenLoading');
 
-      if (url === 'class') {
+      if (url === 'room') {
         resolve({
           data: {
             hash: 'cGVyZ3VudGFl6WZlcmEh',

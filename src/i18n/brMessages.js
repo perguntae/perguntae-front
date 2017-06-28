@@ -1,13 +1,13 @@
 export default {
   br: {
     menu: {
-      createClass: 'Criar nova sala',
+      createRoom: 'Criar nova sala',
     },
     pages: {
-      createClass: {
+      createRoom: {
         form: {
           name: 'Nome',
-          pass: 'Senha',
+          desc: 'Descrição',
           create: 'Criar',
         },
       },

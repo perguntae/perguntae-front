@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import CreateClass from '@/components/CreateClass';
+import CreateRoom from '@/components/CreateRoom';
 import Room from '@/components/Room';
 import Login from '@/components/Login';
 
@@ -10,12 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'CreateClass',
+      redirect: 'CreateRoom',
     },
     {
-      path: '/CreateClass',
-      name: 'CreateClass',
-      component: CreateClass,
+      path: '/CreateRoom',
+      name: 'CreateRoom',
+      component: CreateRoom,
     },
     {
       path: '/Room',

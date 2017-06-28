@@ -2,7 +2,7 @@
   <div id="app" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="header">
       <el-menu :router="true" theme="dark" :default-active="activeIndex" class="header__menu" mode="horizontal">
-        <el-menu-item index="CreateClass">{{ $t("menu.createClass") }}</el-menu-item>
+        <el-menu-item index="CreateRoom">{{ $t("menu.createRoom") }}</el-menu-item>
       </el-menu>
     </div>
     <div class="content">
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       fullscreenLoading: false,
-      activeIndex: 'CreateClass',
+      activeIndex: 'CreateRoom',
     };
   },
   created() {
