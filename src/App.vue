@@ -2,7 +2,10 @@
 
   #app
     el-container
-      el-header Header
+      el-header
+        router-link(to="/room/create") Criar sala
+        span  | 
+        router-link(to="/room/list") Salas
       el-main
         router-view
       el-footer Footer
