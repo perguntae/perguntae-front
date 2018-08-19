@@ -1,15 +1,43 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import {
+  Button,
+  Container,
+  Header,
+  Main,
+  Footer,
+  Form,
+  FormItem,
+  Input,
+  Table,
+  TableColumn,
+} from 'element-ui';
 
 import App from './App.vue';
 
 import router from './router';
 import store from './store';
 import messages from './i18n';
+import lang from '../node_modules/element-ui/lib/locale/lang/pt-br';
+import locale from '../node_modules/element-ui/lib/locale';
 
 import './registerServiceWorker';
+import './style/element-variables.scss';
 
 Vue.config.productionTip = false;
+
+Vue.component(Button.name, Button);
+Vue.component(Container.name, Container);
+Vue.component(Header.name, Header);
+Vue.component(Main.name, Main);
+Vue.component(Footer.name, Footer);
+Vue.component(Form.name, Form);
+Vue.component(FormItem.name, FormItem);
+Vue.component(Input.name, Input);
+Vue.component(Table.name, Table);
+Vue.component(TableColumn.name, TableColumn);
+
+locale.use(lang);
 
 Vue.use(VueI18n);
 
