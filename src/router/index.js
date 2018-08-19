@@ -17,12 +17,12 @@ export default new Router({
         {
           path: 'create',
           name: 'CreateRoom',
-          component: () => import(/* webpackChunkName: "create" */ '@/views/Room/create'),
+          component: () => import(/* webpackChunkName: "room-create" */ '@/views/Room/create'),
         },
         {
           path: 'list',
           name: 'ListRoom',
-          component: () => import(/* webpackChunkName: "list" */ '@/views/Room/list'),
+          component: () => import(/* webpackChunkName: "room-list" */ '@/views/Room/list'),
         },
       ],
     },
