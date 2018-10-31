@@ -3,30 +3,51 @@
   #app
     el-container
       el-header
-        router-link(to="/room/create") Criar sala
-        span  | 
-        router-link(to="/room/list") Salas
+        //- router-link(to="/room/create") Criar sala
+        //- span |
+        //- router-link(to="/room/list") Salas
+        .header-logo
+          p Pergunt
+            span ae
       el-main
         router-view
       el-footer Footer
 
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import './style/style.scss';
 
-.el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
+.header-logo {
+  float: left;
+
+  p {
+    margin: 0;
+
+  }
+
+  span {
+    color: #409EFF;
+  }
+}
+
+.el-footer, .el-header {
+  color: #303133;
   line-height: 60px;
+  overflow: hidden;
+}
+
+.el-header {
+  border-bottom: 1px solid #DCDFE6;
+}
+
+.el-footer {
+  border-top: 1px solid #DCDFE6;
 }
 
 .el-main {
   background-color: #E9EEF3;
   color: #333;
-  text-align: center;
-  line-height: 160px;
 }
 
 body > .el-container {
