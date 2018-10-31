@@ -9,4 +9,8 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#room-container {
+  height: 100%;
+}
+</style>

@@ -18,6 +18,10 @@
 <style lang="scss">
 @import './style/style.scss';
 
+#app {
+  height: 100%;
+}
+
 .header-logo {
   float: left;
 
@@ -46,11 +50,11 @@
 }
 
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  padding: 0 !important;
+  height: 100%;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
+.el-container {
+  height: 100%;
 }
 </style>
