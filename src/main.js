@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import 'normalize.css';
 import VueI18n from 'vue-i18n';
 import {
   Button,
