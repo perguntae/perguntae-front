@@ -11,9 +11,10 @@ import {
   Input,
   Table,
   TableColumn,
+  Card,
 } from 'element-ui';
 
-import App from './App.vue';
+import App from './App';
 
 import router from './router';
 import store from './store';
@@ -36,6 +37,7 @@ Vue.component(FormItem.name, FormItem);
 Vue.component(Input.name, Input);
 Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
+Vue.component(Card.name, Card);
 
 locale.use(lang);
 
