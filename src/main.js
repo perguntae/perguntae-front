@@ -17,6 +17,10 @@ import {
   Col,
 } from 'element-ui';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 import App from './App';
 
 import router from './router';
@@ -47,6 +51,10 @@ Vue.component(Col.name, Col);
 locale.use(lang);
 
 Vue.use(VueI18n);
+
+library.add(faPaperPlane);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const i18n = new VueI18n({
   locale: 'pt-br',
