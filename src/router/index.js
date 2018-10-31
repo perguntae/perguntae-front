@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/room',
-      name: 'room',
+      name: 'Room',
       component: () => import(/* webpackChunkName: "room" */ '@/views/Room'),
       children: [
         {
@@ -21,6 +21,11 @@ export default new Router({
           path: 'list',
           name: 'ListRoom',
           component: () => import(/* webpackChunkName: "room-list" */ '@/views/Room/list'),
+        },
+        {
+          path: ':hash',
+          name: 'InsideRoom',
+          component: () => import(/* webpackChunkName: "room-inside" */ '@/views/Room/inside'),
         },
       ],
     },

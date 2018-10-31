@@ -1,10 +1,4 @@
-import axios from 'axios';
-
-// MOVER PARA A ABSTRACAO
-export const httpApi = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: { 'Content-Type': 'application/json' },
-});
+import request from '../../request';
 
 export default {
   namespaced: true,
@@ -15,16 +9,26 @@ export default {
       title: '',
       description: '',
     },
+    room: {
+      hash: '',
+      questions: [],
+      questionForm: {
+        title: '',
+        description: '',
+      },
+    },
   },
 
   getters: {
     rooms: state => state.rooms,
     formRoom: state => state.formRoom,
+    questions: state => state.room.questions,
+    questionForm: state => state.room.questionForm,
   },
 
   actions: {
     createRoom({ commit, state }) {
-      httpApi.post('/room/new', {
+      request.post('/room/new', {
         name: state.formRoom.title,
         description: state.formRoom.description,
       })
@@ -34,9 +38,37 @@ export default {
         .catch(console.log);
     },
     listRoom({ commit }) {
-      httpApi.get('/room/all')
+      request.get('/room/all')
         .then(({ data }) => {
-          commit('SET_ROOMS', data.data);
+          commit('SET_ROOMS', data.rooms);
+        })
+        .catch(console.log);
+    },
+    getQuestionsFromRoom({ commit, state }) {
+      request.get(`/room/${state.room.hash}/questions`)
+        .then(({ data }) => {
+          commit('SET_ROOM_QUESTIONS', data.room.questions);
+        })
+        .catch(console.log);
+    },
+    setRoomHash({ commit }, hash) {
+      commit('SET_ROOM_HASH', hash);
+    },
+    sendQuestionToRoom({ commit, state }) {
+      request.post(`/room/${state.room.hash}/questions/new`, {
+        question: state.room.questionForm.title,
+        description: state.room.questionForm.description,
+      })
+        .then(({ data }) => {
+          const { hash, title, description } = data.question;
+
+          commit('RESET_QUESTION_FORM');
+
+          commit('SET_NEW_QUESTION', {
+            hash,
+            title,
+            description,
+          });
         })
         .catch(console.log);
     },
@@ -54,6 +86,27 @@ export default {
     'SET_ROOMS'(state, rooms) {
       Object.assign(state, {
         rooms,
+      });
+    },
+    'SET_ROOM_QUESTIONS'(state, questions) {
+      Object.assign(state.room, {
+        questions,
+      });
+    },
+    'SET_ROOM_HASH'(state, hash) {
+      Object.assign(state.room, {
+        hash,
+      });
+    },
+    'SET_NEW_QUESTION'(state, question) {
+      state.room.questions.push(question);
+    },
+    'RESET_QUESTION_FORM'(state) {
+      Object.assign(state.room, {
+        questionForm: {
+          title: '',
+          description: '',
+        },
       });
     },
   },

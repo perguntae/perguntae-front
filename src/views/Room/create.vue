@@ -2,7 +2,7 @@
 
   #create-container
     el-form(label-position="right" label-width="100px" :model="formRoom")
-      el-form-item(:label="$t('room.create.label.title')")
+      el-form-item(:label="$t('room.create.label.name')")
         el-input(v-model="formRoom.title")
       el-form-item(:label="$t('room.create.label.description')")
         el-input(v-model="formRoom.description")
@@ -25,4 +25,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss"></style>
