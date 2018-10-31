@@ -13,6 +13,8 @@ import {
   Table,
   TableColumn,
   Card,
+  Row,
+  Col,
 } from 'element-ui';
 
 import App from './App';
@@ -39,6 +41,8 @@ Vue.component(Input.name, Input);
 Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(Card.name, Card);
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col);
 
 locale.use(lang);
 
