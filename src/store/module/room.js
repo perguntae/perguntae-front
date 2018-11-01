@@ -72,6 +72,9 @@ export default {
         })
         .catch(console.log);
     },
+    updateQuestionDescription({ commit }, questionDescription) {
+      commit('UPDATE_QUESTION_DESCRIPTION', questionDescription);
+    },
   },
 
   mutations: {
@@ -107,6 +110,11 @@ export default {
           title: '',
           description: '',
         },
+      });
+    },
+    'UPDATE_QUESTION_DESCRIPTION'(state, questionDescription) {
+      Object.assign(state.room.questionForm, {
+        description: questionDescription,
       });
     },
   },

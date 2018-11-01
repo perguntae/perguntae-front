@@ -1,27 +1,21 @@
 <template lang="pug">
 
   el-row#inside-container
-    el-col(:span="12").questions
+    el-col(:span="16").questions
       .questions-list
-        el-card.question-list__card
-          .question-list__question-title Não vai ter?
-          .question-list__question-description Como assim não teremos sopa?
-
-        el-card.question-list__card
-          .question-list__question-title Alex? Que Alex?
-          .question-list__question-description Não me lembro de ninguém chamado Alex..
+        el-card.question-list__card(v-for="q in questions" :key="q.hash")
+          .question-list__question-title {{ q.title }}
+          .question-list__question-description {{ q.description }}
 
       el-row.questions-form
         el-col(:span="21")
-          el-input.teste
-            div(slot="placeholder")
-              | Vamos lá, Perguntae!
+          el-input.questions-form__question-input(placeholder="Vamos lá, Perguntae!" :value="questionForm.description" @input="updateQuestionDescription")
 
         el-col(:span="3")
-          el-button.questions-form__btn-enviar
+          el-button.questions-form__btn-enviar(@click="sendQuestionToRoom")
             font-awesome-icon(icon="paper-plane")
 
-    el-col(:span="12").qr-code-details
+    el-col(:span="8").qr-code-details
       p Leia o QRcode para entrar na sala
       img.qr-code-detailt__qr-code-img(src="https://www.unitag.io/images/generator/templates/facebook.png")
 

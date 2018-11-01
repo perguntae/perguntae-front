@@ -14,6 +14,7 @@ export default {
       'setRoomHash',
       'getQuestionsFromRoom',
       'sendQuestionToRoom',
+      'updateQuestionDescription',
     ]),
   },
 };
