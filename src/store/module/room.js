@@ -1,3 +1,4 @@
+import localForage from 'localforage';
 import request from '../../request';
 
 export default {
@@ -28,12 +29,13 @@ export default {
 
   actions: {
     createRoom({ commit, state }) {
-      request.post('/room/new', {
+      return request.post('/room/new', {
         name: state.formRoom.title,
         description: state.formRoom.description,
       })
-        .then(() => {
+        .then(({ data }) => {
           commit('RESET_FORM_ROOM');
+          return data.room;
         })
         .catch(console.log);
     },
@@ -55,25 +57,41 @@ export default {
       commit('SET_ROOM_HASH', hash);
     },
     sendQuestionToRoom({ commit, state }) {
-      request.post(`/room/${state.room.hash}/questions/new`, {
-        question: state.room.questionForm.title,
-        description: state.room.questionForm.description,
-      })
-        .then(({ data }) => {
-          const { hash, title, description } = data.question;
-
-          commit('RESET_QUESTION_FORM');
-
-          commit('SET_NEW_QUESTION', {
-            hash,
-            title,
-            description,
-          });
+      localForage.getItem('user-name').then((value) => {
+        request.post(`/room/${state.room.hash}/questions/new`, {
+          userName: value || 'Anônimo',
+          question: state.room.questionForm.title,
+          description: state.room.questionForm.description,
         })
-        .catch(console.log);
+          .then(({ data }) => {
+            const { hash, title, description } = data.question;
+
+            commit('RESET_QUESTION_FORM');
+
+            commit('SET_NEW_QUESTION', {
+              hash,
+              title,
+              description,
+            });
+          })
+          .catch(console.log);
+      });
     },
     updateQuestionDescription({ commit }, questionDescription) {
       commit('UPDATE_QUESTION_DESCRIPTION', questionDescription);
+    },
+    askForNewQuestions({ state, commit }) {
+      return request.get(`/room/${state.room.hash}/questions`)
+        .then(({ data }) => {
+          const newQuestionsSize = data.room.questions.length - state.room.questions.length;
+
+          if (newQuestionsSize > 0) {
+            commit('SET_ROOM_QUESTIONS', data.room.questions);
+          }
+
+          return newQuestionsSize;
+        })
+        .catch(console.log);
     },
   },
 
