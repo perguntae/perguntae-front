@@ -15,6 +15,8 @@ import {
   Card,
   Row,
   Col,
+  Dialog,
+  Message,
 } from 'element-ui';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -28,6 +30,7 @@ import store from './store';
 import messages from './i18n';
 import lang from '../node_modules/element-ui/lib/locale/lang/pt-br';
 import locale from '../node_modules/element-ui/lib/locale';
+import { askPermission } from './Notifications';
 
 import './registerServiceWorker';
 import './style/element-variables.scss';
@@ -47,6 +50,8 @@ Vue.component(TableColumn.name, TableColumn);
 Vue.component(Card.name, Card);
 Vue.component(Row.name, Row);
 Vue.component(Col.name, Col);
+Vue.component(Dialog.name, Dialog);
+Vue.component(Message.name, Message);
 
 locale.use(lang);
 
@@ -67,3 +72,5 @@ new Vue({
   i18n,
   render: h => h(App),
 }).$mount('#app');
+
+askPermission();
