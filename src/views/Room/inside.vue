@@ -22,7 +22,11 @@
 </template>
 
 <script>
+import localForage from 'localforage';
+
+import request from '../../request';
 import RoomMixin from '../../mixin/room';
+import { showNotification } from '../../Notifications';
 
 export default {
   name: 'InsideRoom',
@@ -32,6 +36,28 @@ export default {
       this.setRoomHash(this.$route.params.hash);
       this.getQuestionsFromRoom();
     }
+
+    localForage.getItem('user-rooms').then((value) => {
+      value = value || [];
+
+      setInterval(() => {
+        this.askForNewQuestions()
+          .then((newQuestionsSize) => {
+            if (value.indexOf(this.$route.params.hash) > -1 && newQuestionsSize > 0) {
+              showNotification({
+                title: `Você tem ${newQuestionsSize} novas perguntas.`,
+              });
+            }
+          });
+      }, 10000);
+    });
+  },
+  methods: {
+    showQuestionNotification() {
+      showNotification({
+        title: 'teste',
+      });
+    },
   },
 };
 </script>

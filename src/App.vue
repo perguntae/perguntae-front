@@ -9,11 +9,66 @@
         .header-logo
           p Pergunt
             span ae
+
+        .header-configs
+          a(@click="dialogFormVisible = true") {{ this.form.userName || 'Anônimo' }}
       el-main
         router-view
       el-footer Footer
 
+    el-dialog(title="Você ainda não tem um nome cadastrdo" :visible.sync="dialogFormVisible")
+      el-form(:model="form")
+        el-form-item(label="Nome" :label-width="formLabelWidth")
+          el-input(v-model="form.userName" autocomplete="off" placeholder="Anônimo")
+      span.dialog-footer(slot="footer")
+        el-button(@click="dialogFormVisible = false") Adicionar depois
+        el-button(type="primary" @click="saveUserName") Confirmar
+
 </template>
+
+<script>
+import localForage from 'localforage';
+import { Message } from 'element-ui';
+
+import { havePermission } from './Notifications';
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      dialogFormVisible: false,
+      formLabelWidth: '120px',
+      form: {
+        userName: '',
+      },
+    };
+  },
+  created() {
+    localForage.getItem('user-name').then((value) => {
+      if (value) {
+        this.form.userName = value;
+      } else {
+        this.dialogFormVisible = true;
+      }
+    });
+
+    if (!havePermission()) {
+      Message({
+        message: 'Para receber notificações por favor ative na barra de pesquisa.',
+        type: 'warning',
+        showClose: true,
+      });
+    }
+  },
+  methods: {
+    saveUserName() {
+      localForage.setItem('user-name', this.form.userName).then((value) => {
+        this.dialogFormVisible = false;
+      });
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 @import './style/style.scss';
@@ -32,6 +87,16 @@
 
   span {
     color: #409EFF;
+  }
+}
+
+.header-configs {
+  float: right;
+
+  a:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
