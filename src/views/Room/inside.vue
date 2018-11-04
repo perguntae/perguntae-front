@@ -4,7 +4,7 @@
     el-col(:span="16").questions
       .questions-list
         el-card.question-list__card(v-for="q in questions" :key="q.hash")
-          .question-list__question-title {{ q.title }}
+          .question-list__question-title {{ q.userName }}
           .question-list__question-description {{ q.description }}
 
       el-row.questions-form
